@@ -135,7 +135,7 @@ const PackageTracking = () => {
   return (
     <div className="min-h-[100vh] flex flex-col lg:flex-row p-4 space-y-4 lg:space-y-0 lg:space-x-4">
       {/* Sidebar */}
-      <div className="w-full lg:w-1/4 bg-white p-4 rounded-lg shadow-md">
+      <div className="w-full lg:w-1/4 bg-[#d4d4d4] p-4 rounded-lg shadow-md">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-bold">Track your package</h2>
         </div>
@@ -259,7 +259,7 @@ const PackageTracking = () => {
       </div>
 
       {/* Main Content */}
-      <div className="w-full lg:w-3/4 bg-white p-4 rounded-lg shadow-md">
+      <div className="w-full lg:w-3/4 bg-[#e4e4e4] p-4 rounded-lg shadow-md">
         {/* Reward Points Display */}
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-bold">Your Deliveries</h2>
@@ -272,7 +272,7 @@ const PackageTracking = () => {
         {/* Parcel Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
           {parcels.map((parcel) => (
-            <div key={parcel.id} className="relative border p-4 rounded-lg shadow-md bg-slate-600">
+            <div key={parcel.id} className="relative border p-5 rounded-lg shadow-md bg-white">
               {/* Sender's Name */}
               <p className="absolute top-2 right-2 text-md font-semibold text-[#fe854f]">
                 Sent By: {parcel.sentBy}
