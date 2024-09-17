@@ -37,6 +37,10 @@ const SignIn: React.FC = () => {
           Postman Login
         </Link>
 
+        <Link href="/sender" className="w-full bg-black text-white py-3 rounded-lg mb-6 hover:bg-gray-800 block text-center">
+          Sender Login
+        </Link>
+
         <Link href="/user" className="w-full bg-black text-white py-3 rounded-lg mb-6 hover:bg-gray-800 block text-center">
           User Login
         </Link>

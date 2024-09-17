@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import parcel from '@/public/assets/parcel.jpeg';
+import parcel from "@/public/assets/parcel.jpeg";
 
 // Helper function to generate a random date before a given date
 const getRandomDateBefore = (defaultDate: Date) => {
@@ -21,17 +21,23 @@ const PackageTracking = () => {
   const [expandedParcelId, setExpandedParcelId] = useState<number | null>(null);
 
   // State to track expanded history cards
-  const [expandedHistoryId, setExpandedHistoryId] = useState<number | null>(null);
+  const [expandedHistoryId, setExpandedHistoryId] = useState<number | null>(
+    null
+  );
 
   // State to handle search query and searched parcel
   const [searchQuery, setSearchQuery] = useState("");
   const [searchedParcel, setSearchedParcel] = useState<any>(null);
 
   // State to track manually scheduled dates and times for each parcel
-  const [manualDeliveryDates, setManualDeliveryDates] = useState<{ [key: number]: { date: string, time: string } }>({});
+  const [manualDeliveryDates, setManualDeliveryDates] = useState<{
+    [key: number]: { date: string; time: string };
+  }>({});
 
   // State to track delivery location and contact number
-  const [deliveryDetails, setDeliveryDetails] = useState<{ [key: number]: { location: string, contact: string } }>({});
+  const [deliveryDetails, setDeliveryDetails] = useState<{
+    [key: number]: { location: string; contact: string };
+  }>({});
 
   // State to track "Off Location Delivery" checkbox
   const [offLocationDelivery, setOffLocationDelivery] = useState(false);
@@ -92,7 +98,11 @@ const PackageTracking = () => {
   };
 
   // Function to handle manual scheduling of delivery
-  const handleManualSchedule = (parcelId: number, date: string, time: string) => {
+  const handleManualSchedule = (
+    parcelId: number,
+    date: string,
+    time: string
+  ) => {
     setManualDeliveryDates({
       ...manualDeliveryDates,
       [parcelId]: { date, time },
@@ -100,7 +110,11 @@ const PackageTracking = () => {
   };
 
   // Function to handle changes in delivery details
-  const handleDeliveryDetailsChange = (parcelId: number, location: string, contact: string) => {
+  const handleDeliveryDetailsChange = (
+    parcelId: number,
+    location: string,
+    contact: string
+  ) => {
     setDeliveryDetails({
       ...deliveryDetails,
       [parcelId]: { location, contact },
@@ -119,12 +133,16 @@ const PackageTracking = () => {
 
   // Function to handle parcel search
   const handleSearch = () => {
-    const foundParcel = parcels.find((parcel) => parcel.shipmentNumber === searchQuery);
+    const foundParcel = parcels.find(
+      (parcel) => parcel.shipmentNumber === searchQuery
+    );
     setSearchedParcel(foundParcel || null);
   };
 
   // Function to handle change in update preferences
-  const handleUpdatePreferenceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUpdatePreferenceChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { name, checked } = e.target;
     setUpdatePreferences({
       ...updatePreferences,
@@ -159,10 +177,19 @@ const PackageTracking = () => {
         {searchedParcel && (
           <div className="mt-6 bg-gray-100 p-4 rounded-lg">
             <h3 className="text-md font-bold">Search Result</h3>
-            <p className="text-sm font-medium">Sent By: {searchedParcel.sentBy}</p>
-            <p className="text-xs text-gray-500">Shipment Number: {searchedParcel.shipmentNumber}</p>
-            <p className="text-sm text-gray-700 mt-1">{searchedParcel.sentDate.toDateString()}</p>
-            <p className="text-sm">Default Delivery Date: {searchedParcel.defaultDeliveryDate.toDateString()}</p>
+            <p className="text-sm font-medium">
+              Sent By: {searchedParcel.sentBy}
+            </p>
+            <p className="text-xs text-gray-500">
+              Shipment Number: {searchedParcel.shipmentNumber}
+            </p>
+            <p className="text-sm text-gray-700 mt-1">
+              {searchedParcel.sentDate.toDateString()}
+            </p>
+            <p className="text-sm">
+              Default Delivery Date:{" "}
+              {searchedParcel.defaultDeliveryDate.toDateString()}
+            </p>
             <p className="text-sm">
               AI Scheduled Date:{" "}
               {searchedParcel.aiScheduledDate
@@ -181,24 +208,39 @@ const PackageTracking = () => {
                 {/* Main Card Info */}
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="text-sm font-medium">Sent By: {parcel.sentBy}</p>
-                    <p className="text-xs text-gray-500">Shipment Number: {parcel.shipmentNumber}</p>
-                    <p className="text-sm text-gray-700 mt-1">{parcel.sentDate.toDateString()}</p>
+                    <p className="text-sm font-medium">
+                      Sent By: {parcel.sentBy}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      Shipment Number: {parcel.shipmentNumber}
+                    </p>
+                    <p className="text-sm text-gray-700 mt-1">
+                      {parcel.sentDate.toDateString()}
+                    </p>
                   </div>
                   <button
                     className="px-2 py-1 bg-blue-500 text-white text-sm rounded-lg"
                     onClick={() => toggleHistoryDetails(parcel.id)}
                   >
-                    {expandedHistoryId === parcel.id ? "Hide Details" : "View Details"}
+                    {expandedHistoryId === parcel.id
+                      ? "Hide Details"
+                      : "View Details"}
                   </button>
                 </div>
 
                 {/* Expanded View */}
                 {expandedHistoryId === parcel.id && (
                   <div className="mt-4 bg-gray-100 p-4 rounded-lg">
-                    <p className="text-sm font-bold">Sent By: {parcel.sentBy}</p>
-                    <p className="text-sm">Sent Date: {parcel.sentDate.toDateString()}</p>
-                    <p className="text-sm">Default Delivery Date: {parcel.defaultDeliveryDate.toDateString()}</p>
+                    <p className="text-sm font-bold">
+                      Sent By: {parcel.sentBy}
+                    </p>
+                    <p className="text-sm">
+                      Sent Date: {parcel.sentDate.toDateString()}
+                    </p>
+                    <p className="text-sm">
+                      Default Delivery Date:{" "}
+                      {parcel.defaultDeliveryDate.toDateString()}
+                    </p>
                     <p className="text-sm">
                       AI Scheduled Date:{" "}
                       {parcel.aiScheduledDate
@@ -208,7 +250,11 @@ const PackageTracking = () => {
                     <p className="text-sm">
                       Manually Scheduled Date & Time:{" "}
                       {manualDeliveryDates[parcel.id]
-                        ? `${new Date(manualDeliveryDates[parcel.id].date).toDateString()} ${manualDeliveryDates[parcel.id].time}`
+                        ? `${new Date(
+                            manualDeliveryDates[parcel.id].date
+                          ).toDateString()} ${
+                            manualDeliveryDates[parcel.id].time
+                          }`
                         : "NIL"}
                     </p>
                     {offLocationDelivery && (
@@ -241,7 +287,9 @@ const PackageTracking = () => {
                 onChange={handleUpdatePreferenceChange}
                 className="h-5 w-5 text-blue-600 border-gray-300 rounded"
               />
-              <label htmlFor="whatsapp" className="text-sm font-medium">Get updates on WhatsApp</label>
+              <label htmlFor="whatsapp" className="text-sm font-medium">
+                Get updates on WhatsApp
+              </label>
             </div>
             <div className="flex items-center space-x-2 mt-2">
               <input
@@ -252,7 +300,52 @@ const PackageTracking = () => {
                 onChange={handleUpdatePreferenceChange}
                 className="h-5 w-5 text-blue-600 border-gray-300 rounded"
               />
-              <label htmlFor="gmail" className="text-sm font-medium">Get updates on Gmail</label>
+              <label htmlFor="gmail" className="text-sm font-medium">
+                Get updates on Gmail
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <div className="bg-white p-4 rounded-lg shadow-md">
+            <h3 className="text-md font-bold mb-2">Rewards Information</h3>
+            <div className="space-y-2">
+              {/* Reward for AI-suggested time */}
+              <div className="flex items-center space-x-2">
+                <img
+                  src="/assets/coin.png" // Use the path to your coin icon image
+                  alt="Coin Icon"
+                  className="w-5 h-5"
+                />
+                <p className="text-sm">
+                  30 points for choosing AI-suggested time
+                </p>
+              </div>
+
+              {/* Reward for choosing off-peak time */}
+              <div className="flex items-center space-x-2">
+                <img
+                  src="/assets/coin.png"
+                  alt="Coin Icon"
+                  className="w-5 h-5"
+                />
+                <p className="text-sm">
+                  50 points for choosing off-peak delivery time
+                </p>
+              </div>
+
+              {/* Reward for delivery on the first attempt */}
+              <div className="flex items-center space-x-2">
+                <img
+                  src="/assets/coin.png"
+                  alt="Coin Icon"
+                  className="w-5 h-5"
+                />
+                <p className="text-sm">
+                  20 points for delivery on the first attempt
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -264,22 +357,34 @@ const PackageTracking = () => {
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-bold">Your Deliveries</h2>
           <div className="text-right">
-            <p className="text-xl font-bold">Reward Points: {rewardPoints}</p>
-            <p className="text-sm text-gray-500">Earn more by scheduling with AI</p>
+            <div className="flex items-center justify-end">
+              <p className="text-xl font-bold">Reward Points: {rewardPoints}</p>
+              <img
+                src="/assets/coin.png" // Use the path to your coin icon image
+                alt="Coin Icon"
+                className="w-5 h-5 ml-2"
+              />
+            </div>
+            <p className="text-sm text-gray-500">
+              Earn more by scheduling with AI
+            </p>
           </div>
         </div>
 
         {/* Parcel Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
           {parcels.map((parcel) => (
-            <div key={parcel.id} className="relative border p-5 rounded-lg shadow-md bg-white">
+            <div
+              key={parcel.id}
+              className="relative border p-5 rounded-lg shadow-md bg-white"
+            >
               {/* Sender's Name */}
               <p className="absolute top-2 right-2 text-md font-semibold text-[#fe854f]">
                 Sent By: {parcel.sentBy}
               </p>
 
               {/* Image of Parcel */}
-              <img 
+              <img
                 src="/assets/parcel1.png" // Ensure the image path is correct
                 alt="Parcel"
                 className="w-full h-60 object-contain mb-4" // Style the image
@@ -304,42 +409,72 @@ const PackageTracking = () => {
                   ? "Scheduled by AI"
                   : "Schedule Delivery with AI (+10 points)"}
               </button>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Manual Scheduling</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Manual Scheduling
+              </label>
               <input
                 type="date"
                 className="w-full mb-2 p-2 border rounded-md"
-                onChange={(e) => handleManualSchedule(parcel.id, e.target.value, manualDeliveryDates[parcel.id]?.time || '')}
+                onChange={(e) =>
+                  handleManualSchedule(
+                    parcel.id,
+                    e.target.value,
+                    manualDeliveryDates[parcel.id]?.time || ""
+                  )
+                }
               />
               <input
                 type="time"
                 className="w-full mb-2 p-2 border rounded-md"
-                onChange={(e) => handleManualSchedule(parcel.id, manualDeliveryDates[parcel.id]?.date || '', e.target.value)}
+                onChange={(e) =>
+                  handleManualSchedule(
+                    parcel.id,
+                    manualDeliveryDates[parcel.id]?.date || "",
+                    e.target.value
+                  )
+                }
               />
               <button
                 className="w-full py-2 bg-[#e8e8e8] text-black rounded-md mb-2"
                 onClick={() => setShowDeliveryOptions(!showDeliveryOptions)}
               >
-                {showDeliveryOptions ? "Hide OFD Details" : "Add OFD"}
+                {showDeliveryOptions ? "Hide OLD Details" : "Add OLD"}
               </button>
 
               {/* Delivery Location and Contact Number */}
               {showDeliveryOptions && (
                 <>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Delivery Location</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Delivery Location
+                  </label>
                   <input
                     type="text"
                     className="w-full mb-2 p-2 border rounded-md"
                     placeholder="Enter delivery location"
-                    value={deliveryDetails[parcel.id]?.location || ''}
-                    onChange={(e) => handleDeliveryDetailsChange(parcel.id, e.target.value, deliveryDetails[parcel.id]?.contact || '')}
+                    value={deliveryDetails[parcel.id]?.location || ""}
+                    onChange={(e) =>
+                      handleDeliveryDetailsChange(
+                        parcel.id,
+                        e.target.value,
+                        deliveryDetails[parcel.id]?.contact || ""
+                      )
+                    }
                   />
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Contact Number</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Contact Number
+                  </label>
                   <input
                     type="text"
                     className="w-full mb-2 p-2 border rounded-md"
                     placeholder="Enter contact number"
-                    value={deliveryDetails[parcel.id]?.contact || ''}
-                    onChange={(e) => handleDeliveryDetailsChange(parcel.id, deliveryDetails[parcel.id]?.location || '', e.target.value)}
+                    value={deliveryDetails[parcel.id]?.contact || ""}
+                    onChange={(e) =>
+                      handleDeliveryDetailsChange(
+                        parcel.id,
+                        deliveryDetails[parcel.id]?.location || "",
+                        e.target.value
+                      )
+                    }
                   />
                 </>
               )}
@@ -347,23 +482,36 @@ const PackageTracking = () => {
                 className="w-full py-2 bg-white text-black rounded-md"
                 onClick={() => toggleParcelDetails(parcel.id)}
               >
-                {expandedParcelId === parcel.id ? "Hide Details" : "View Details"}
+                {expandedParcelId === parcel.id
+                  ? "Hide Details"
+                  : "View Details"}
               </button>
 
               {/* Expanded View */}
               {expandedParcelId === parcel.id && (
                 <div className="mt-4 bg-gray-100 p-4 rounded-lg">
                   <p className="text-sm font-bold">Sent By: {parcel.sentBy}</p>
-                  <p className="text-sm">Sent Date: {parcel.sentDate.toDateString()}</p>
-                  <p className="text-sm">Default Delivery Date: {parcel.defaultDeliveryDate.toDateString()}</p>
+                  <p className="text-sm">
+                    Sent Date: {parcel.sentDate.toDateString()}
+                  </p>
+                  <p className="text-sm">
+                    Default Delivery Date:{" "}
+                    {parcel.defaultDeliveryDate.toDateString()}
+                  </p>
                   <p className="text-sm">
                     AI Scheduled Date:{" "}
-                    {parcel.aiScheduledDate ? parcel.aiScheduledDate.toDateString() : "NIL"}
+                    {parcel.aiScheduledDate
+                      ? parcel.aiScheduledDate.toDateString()
+                      : "NIL"}
                   </p>
                   <p className="text-sm">
                     Manually Scheduled Date & Time:{" "}
                     {manualDeliveryDates[parcel.id]
-                      ? `${new Date(manualDeliveryDates[parcel.id].date).toDateString()} ${manualDeliveryDates[parcel.id].time}`
+                      ? `${new Date(
+                          manualDeliveryDates[parcel.id].date
+                        ).toDateString()} ${
+                          manualDeliveryDates[parcel.id].time
+                        }`
                       : "NIL"}
                   </p>
                   {offLocationDelivery && (
