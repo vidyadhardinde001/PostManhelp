@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import parcel from '@/public/assets/parcel.jpeg';
+import parcel from '@/public/assets/parcel.jpeg'; // Adjust if the path is different
 
 const SenderPackageTracking = () => {
   // State to track the expanded parcel
@@ -9,6 +9,9 @@ const SenderPackageTracking = () => {
   // State to handle search query and searched parcel
   const [searchQuery, setSearchQuery] = useState("");
   const [searchedParcel, setSearchedParcel] = useState<any>(null);
+
+  // State for manual scheduling
+  const [manualDeliveryDates, setManualDeliveryDates] = useState<Record<number, { date: string; time: string }>>({});
 
   // List of parcels sent by the sender (sample data)
   const [parcels, setParcels] = useState([
@@ -47,6 +50,14 @@ const SenderPackageTracking = () => {
   // Function to toggle the expanded state of a parcel
   const toggleParcelDetails = (parcelId: number) => {
     setExpandedParcelId(expandedParcelId === parcelId ? null : parcelId);
+  };
+
+  // Function to handle manual scheduling
+  const handleManualSchedule = (id: number, date: string, time: string) => {
+    setManualDeliveryDates({
+      ...manualDeliveryDates,
+      [id]: { date, time },
+    });
   };
 
   return (
@@ -152,6 +163,31 @@ const SenderPackageTracking = () => {
                 className="w-full py-2 bg-white text-black rounded-md"
                 onClick={() => toggleParcelDetails(parcel.id)}
               >
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Manual Scheduling
+                </label>
+                <input
+                  type="date"
+                  className="w-full mb-2 p-2 border rounded-md"
+                  onChange={(e) =>
+                    handleManualSchedule(
+                      parcel.id,
+                      e.target.value,
+                      manualDeliveryDates[parcel.id]?.time || ""
+                    )
+                  }
+                />
+                <input
+                  type="time"
+                  className="w-full mb-2 p-2 border rounded-md"
+                  onChange={(e) =>
+                    handleManualSchedule(
+                      parcel.id,
+                      manualDeliveryDates[parcel.id]?.date || "",
+                      e.target.value
+                    )
+                  }
+                />
                 {expandedParcelId === parcel.id ? "Hide Details" : "View Details"}
               </button>
 
