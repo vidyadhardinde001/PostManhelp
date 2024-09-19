@@ -2,33 +2,42 @@
 
 import React, { useState } from 'react';
 
-const Dashboard = () => {
+// Define the types for delivery times and points
+type DeliveryTimes = {
+  [key: string]: string;
+};
+
+type Points = {
+  [key: string]: number;
+};
+
+const Dashboard: React.FC = () => {
   // State for modal, delivery times, reward points, and customer deliveries
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedDelivery, setSelectedDelivery] = useState(null); // Track which delivery is being rescheduled
-  const [newTime, setNewTime] = useState(''); // Store the newly selected time
-  const [deliveryTimes, setDeliveryTimes] = useState({
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedDelivery, setSelectedDelivery] = useState<string | null>(null); // Track which delivery is being rescheduled
+  const [newTime, setNewTime] = useState<string>(''); // Store the newly selected time
+  const [deliveryTimes, setDeliveryTimes] = useState<DeliveryTimes>({
     customerA: '10:00 AM',
     customerB: '12:00 PM',
     customerC: '2:00 PM',
   });
-  const [rewardPoints, setRewardPoints] = useState(3000);
-  const [points, setPoints] = useState({
+  const [rewardPoints, setRewardPoints] = useState<number>(3000);
+  const [points, setPoints] = useState<Points>({
     customerA: 20,
     customerB: 20,
     customerC: 20,
   });
-  const [deliveries, setDeliveries] = useState(['customerA', 'customerB', 'customerC']); // List of active deliveries
+  const [deliveries, setDeliveries] = useState<string[]>(['customerA', 'customerB', 'customerC']); // List of active deliveries
 
   // Open modal for rescheduling
-  const openModal = (customer) => {
+  const openModal = (customer: string) => {
     setSelectedDelivery(customer); // Set the delivery being modified
     setIsModalOpen(true);
   };
 
   // Save the new delivery time
   const saveTime = () => {
-    if (newTime) {
+    if (newTime && selectedDelivery) {
       setDeliveryTimes((prev) => ({
         ...prev,
         [selectedDelivery]: newTime,
@@ -44,7 +53,7 @@ const Dashboard = () => {
   };
 
   // Complete delivery and remove it from the list
-  const completeDelivery = (customer) => {
+  const completeDelivery = (customer: string) => {
     setRewardPoints(rewardPoints + points[customer]);
     setDeliveries((prevDeliveries) => prevDeliveries.filter((item) => item !== customer)); // Remove the completed delivery
   };
@@ -57,9 +66,9 @@ const Dashboard = () => {
         <div className="rewards-card bg-white shadow-lg rounded-lg p-4 flex items-center">
           {/* Larger Rewards Icon */}
           <img
-            src="/assets/rewards.jpeg" // Update this to the correct path for your icon
+            src="/rewards.jpeg" // Ensure the image is in the public folder
             alt="Rewards Icon"
-            className="w-12 h-12 mr-3" // Adjusted size to make the icon 48x48 pixels
+            className="w-12 h-12 mr-3"
           />
           <div>
             <p className="text-gray-500">Rewards Points</p>
@@ -74,10 +83,9 @@ const Dashboard = () => {
           <h2 className="text-xl font-semibold mb-4">Next Delivery</h2>
           <div className="map-container bg-gray-200 rounded-lg overflow-hidden">
             <img
-              src="/assets/postman.png"
+              src="/postman.png" // Ensure the image is in the public folder
               alt="Map showing direction for next delivery"
               className="w-full h-auto"
-              style={{ marginLeft: '20px' }}
             />
           </div>
         </section>
