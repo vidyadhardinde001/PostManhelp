@@ -42,7 +42,7 @@ const SignIn: React.FC = () => {
         </Link>
 
         <Link href="/user" className="w-full bg-black text-white py-3 rounded-lg mb-6 hover:bg-gray-800 block text-center">
-          User Login
+          Reciever Login
         </Link>
       </div>
     </div>
