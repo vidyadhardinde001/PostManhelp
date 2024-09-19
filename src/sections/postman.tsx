@@ -66,7 +66,7 @@ const Dashboard: React.FC = () => {
         <div className="rewards-card bg-white shadow-lg rounded-lg p-4 flex items-center">
           {/* Larger Rewards Icon */}
           <img
-            src="/rewards.jpeg" // Ensure the image is in the public folder
+            src="/assets/rewards.jpeg" // Ensure the image is in the public folder
             alt="Rewards Icon"
             className="w-12 h-12 mr-3"
           />
@@ -83,7 +83,7 @@ const Dashboard: React.FC = () => {
           <h2 className="text-xl font-semibold mb-4">Next Delivery</h2>
           <div className="map-container bg-gray-200 rounded-lg overflow-hidden">
             <img
-              src="/postman.png" // Ensure the image is in the public folder
+              src="/assets/postman.png" // Ensure the image is in the public folder
               alt="Map showing direction for next delivery"
               className="w-full h-auto"
             />
